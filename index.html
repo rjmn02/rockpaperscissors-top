@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rock Paper Scissors</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+<body>
+  <script>
+    const choices = ['rock', 'paper', 'scissors'];
+
+    function getComputerChoice() {
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    function getUserChoice() {
+      let userChoice = prompt('Enter rock, paper, or scissors: ');
+      if (userChoice === 'rock' || userChoice === 'paper' || userChoice === 'scissors') {
+        return userChoice;
+      } else {
+        return 'Invalid choice';
+      }
+    }
+
+    function playRound(humanChoice, computerChoice) {
+      if (humanChoice === computerChoice) {
+        console.log(`its a tie, you chose ${humanChoice}, computer chose ${computerChoice}`)
+        return undefined;
+      } else if (humanChoice === 'rock' && computerChoice === 'scissors') {
+        console.log(`You win, you chose ${humanChoice}, computer chose ${computerChoice}`)
+        return true;
+      } else if (humanChoice === 'paper' && computerChoice === 'rock') {
+        console.log(`You win, you chose ${humanChoice}, computer chose ${computerChoice}`)
+        return true;
+      } else if (humanChoice === 'scissors' && computerChoice === 'paper') {
+        console.log(`You win, you chose ${humanChoice}, computer chose ${computerChoice}`)
+        return true;
+      } else {
+        console.log(`You lose, you chose ${humanChoice}, computer chose ${computerChoice}`)
+        return false;
+      }
+    }
+
+    function playGame() {
+      let humanScore = 0;
+      let computerScore = 0;
+
+      for (let rounds = 1; rounds <= 5; rounds++){
+        console.log(`Round ${rounds}`);
+        console.log(`Human: ${humanScore} Computer: ${computerScore}`);
+        let userChoice = getUserChoice();
+        let computerChoice = getComputerChoice();
+
+        if (playRound(userChoice, computerChoice) === true) {
+          humanScore++;
+        } else if (playRound(userChoice, computerChoice) === false) {
+          computerScore++;
+        } else {
+          humanScore++;
+          computerScore++;
+        }
+      }
+      console.log(`Final Score: Human: ${humanScore} Computer: ${computerScore}`);
+    }
+    playGame();
+  </script>
+</body>
+</html>
